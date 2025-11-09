@@ -26,13 +26,13 @@ class SistemaAmistapp:
         return None     
         
     def mostrar_todo(self):
-        print("\n📚 --- LISTA DE AMIGOS ---")
+        print("\n📚  LISTA DE AMIGOS ")
         if self.amigos:
             for amigo in self.amigos:
                 print(f"⭐{amigo.nombre}-{amigo.apodo}")
         else:
             print("no hay amigos registrados.")
-        print("\n🎉 --- LISTA DE EVENTOS ---")
+        print("\n🎉 LISTA DE EVENTOS ")
         if self.eventos:
             for evento in self.eventos:
                 print(f"-{evento.titulo} ({evento.fecha}) ({evento.duracion}) ({evento.importancia}) ({evento.estado})")
