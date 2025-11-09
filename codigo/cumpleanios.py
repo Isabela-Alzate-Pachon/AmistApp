@@ -1,6 +1,6 @@
 from datetime import datetime
-from Actividad import Actividad
-from Recordatorio import Recordatorio
+from actividad import Actividad
+from recordatorio import Recordatorio
 
 class Cumpleaños(Actividad):
     def __init__(self, titulo:str, fecha:str, descripcion: str, recordatorio: Recordatorio, mensaje_felicitaciones: str):
