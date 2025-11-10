@@ -1,10 +1,29 @@
 from amigo import Amigo 
 from evento import Evento 
+from cumpleanios import Cumpleaños
 
-class SistemaAmistapp:
+
+class Sistema_amistapp:
     def __init__(self):
         self.eventos = []
         self.amigos = []
+        self.cumpleaños = []
+        self.recordatorios = []
+
+        
+    def agregar_amigo(self, amigo: Amigo):
+        self.amigos.append(amigo)
+        print(f"✅ Amigo '{amigo.nombre}' agregado correctamente 🫶.")
+        
+    def buscar_amigo(self, nombre: str):
+        for amigo in self.amigos:
+            if amigo.nombre.lower() == nombre.lower():
+                print(f"🫂 Amigo encontrado: {amigo.nombre}")
+                return amigo
+        print(f"⚠️ No se ha encontrado ningún amigo con el nombre '{nombre}'.")
+        return None  
+    
+
         
     def agregar_evento(self, evento: Evento):
         self.eventos. append(evento)
@@ -24,6 +43,10 @@ class SistemaAmistapp:
                 return amigo
         print(f"⚠️ no se ha encontrado ningun amigo con el nombre{nombre}.")
         return None     
+    
+    def agregar_cumpleaños(self, cumple: Cumpleaños):
+        self.cumpleaños.append(cumple)
+        print(f"🎂 Cumpleaños de '{cumple.titulo}' agregado correctamente 🎉.")
         
     def mostrar_todo(self):
         print("\n📚  LISTA DE AMIGOS ")
@@ -35,6 +58,13 @@ class SistemaAmistapp:
         print("\n🎉 LISTA DE EVENTOS ")
         if self.eventos:
             for evento in self.eventos:
-                print(f"-{evento.titulo} ({evento.fecha}) ({evento.duracion}) ({evento.importancia}) ({evento.estado})")
+                print(f"-{evento.titulo} ({evento.fecha}) ({evento.duracion}) ({evento.nivel_importancia}) ({evento.estado})")
         else:
             print("No hay eventos registrados.")
+        
+        print("\n🎂 LISTA DE CUMPLEAÑOS")
+        if self.cumpleaños:
+            for cumple in self.cumpleaños:
+                print(f"- {cumple.titulo} ({cumple.fecha}) 🎈")
+        else:
+            print("No hay cumpleaños registrados.")   
