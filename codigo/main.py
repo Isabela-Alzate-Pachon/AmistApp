@@ -10,10 +10,11 @@ def mostrar_menu():
     print("""
           🎀 MENÚ PRINCIPAL AMISTAPP 🎀
 1️⃣  Agregar amigo
-2️⃣  Agregar evento
-3️⃣  Agregar cumpleaños
-4️⃣  Mostrar todo
-5️⃣  Salir
+2️⃣  Agregar actividad (evento o cumpleaños)
+3️⃣  Agregar interés
+4️⃣  Eliminar actividad
+5️⃣  Mostrar todo
+6️⃣  Salir
           """)
 
 def agregar_amigo(sistema: Sistema_amistapp):
@@ -24,46 +25,75 @@ def agregar_amigo(sistema: Sistema_amistapp):
     amigo = Amigo(nombre, apellido, apodo, genero)
     sistema.agregar_amigo(amigo)
 
-def agregar_evento(sistema: Sistema_amistapp):
-    titulo = input("📌 Título del evento: ")
-    fecha = input("📅 Fecha (AAAA-MM-DD): ")
-    descripcion = input("📝 Descripción: ")
-    lugar = input("📍 Lugar: ")
-    duracion = float(input("⏱️ Duración (en horas): "))
-    nivel_importancia = int(input("🔥 Nivel de importancia (1-10): "))
-    estado = input("📌 Estado del evento: ")
-    mensaje_recordatorio = input("💌 Mensaje del recordatorio: ")
-    fecha_recordatorio = input("⏰ Fecha del recordatorio (AAAA-MM-DD): ")
-    recordatorio = Recordatorio(mensaje_recordatorio, fecha_recordatorio)
-    evento = Evento(titulo, fecha, descripcion, recordatorio, lugar, duracion, nivel_importancia, estado)
-    sistema.agregar_evento(evento)
+def agregar_actividad(sistema):
+    tipo = input("¿Qué tipo de actividad deseas agregar? (evento/cumpleaños): ").strip().lower()
 
-def agregar_cumpleaños(sistema: Sistema_amistapp):
-    titulo = input("🎂 Nombre del cumpleañero: ")
-    fecha = input("📅 Fecha de cumpleaños (AAAA-MM-DD): ")
+    if tipo == "evento":
+        titulo = input("📌 Título del evento: ")
+        fecha = input("📅 Fecha (AAAA-MM-DD): ")
+        descripcion = input("📝 Descripción: ")
+        lugar = input("📍 Lugar: ")
+        duracion = float(input("⏱️ Duración (en horas): "))
+        importancia = int(input("🔥 Nivel de importancia (1-10): "))
+        estado = input("📌 Estado del evento: ")
+        mensaje_rec = input("💌 Mensaje del recordatorio: ")
+        fecha_rec = input("⏰ Fecha del recordatorio (AAAA-MM-DD): ")
+        recordatorio = Recordatorio(fecha_rec, mensaje_rec)
+
+        evento = Evento(titulo, fecha, descripcion, recordatorio, lugar, duracion, importancia, estado)
+        sistema.agregar_actividad(evento)
+
+    elif tipo == "cumpleaños":
+        nombre = input("🎂 Nombre del cumpleañero: ")
+        fecha = input("📅 Fecha de cumpleaños (AAAA-MM-DD): ")
+        descripcion = input("📝 Descripción: ")
+        mensaje_rec = input("💌 Mensaje del recordatorio: ")
+        fecha_rec = input("⏰ Fecha del recordatorio (AAAA-MM-DD): ")
+        mensaje_fel = input("🎉 Mensaje de felicitación: ")
+        recordatorio = Recordatorio(fecha_rec, mensaje_rec)
+
+        cumple = Cumpleaños(nombre, fecha, descripcion, recordatorio, mensaje_fel)
+        sistema.agregar_actividad(cumple)
+
+    else:
+        print("⚠️ Tipo de actividad no válido.")
+
+    
+def agregar_interes(sistema: Sistema_amistapp):
+    nombre = input("🎯 Nombre del interés: ")
     descripcion = input("📝 Descripción: ")
-    mensaje_recordatorio = input("💌 Mensaje del recordatorio: ")
-    fecha_recordatorio = input("⏰ Fecha del recordatorio (AAAA-MM-DD): ")
-    mensaje_felicitaciones = input("🎉 Mensaje de felicitación: ")
-    recordatorio = Recordatorio(mensaje_recordatorio, fecha_recordatorio)
-    cumple = Cumpleaños(titulo, fecha, descripcion, recordatorio, mensaje_felicitaciones)
-    sistema.agregar_cumpleaños(cumple)
+    Interes.mostrar_categorias_disponibles()
+    categoria = input("🏷️ Categoría: ")
+    nivel_frecuencia = int(input("🔁 Nivel de frecuencia (1-10): "))
+    interes = Interes(nombre, descripcion, categoria, nivel_frecuencia)
+    sistema.agregar_interes(interes)
+
+
+
 
 if __name__ == "__main__":
-    sistema = Sistema_amistapp()
-    while True:
-        mostrar_menu()
-        opcion = input("👉 Elige una opción: ")
-        if opcion == "1":
-            agregar_amigo(sistema)
-        elif opcion == "2":
-            agregar_evento(sistema)
-        elif opcion == "3":
-            agregar_cumpleaños(sistema)
-        elif opcion == "4":
-            sistema.mostrar_todo()
-        elif opcion == "5":
-            print("👋 ¡Gracias por usar AmistApp! Hasta pronto.")
-            break
-        else:
-            print("❌ Opción inválida. Intenta de nuevo.")
+    from sistema_amistapp import Sistema_amistapp
+
+
+sistema = Sistema_amistapp()
+
+while True:
+    mostrar_menu()
+    opcion = input("👉 Elige una opción: ")
+
+    if opcion == "1":
+        agregar_amigo(sistema)
+    elif opcion == "2":
+        agregar_actividad(sistema)
+    elif opcion == "3":
+        agregar_interes(sistema)
+    elif opcion == "4":
+        titulo = input("🗑️ Escribe el título de la actividad a eliminar: ")
+        sistema.eliminar_actividad(titulo)
+    elif opcion == "5":
+        sistema.mostrar_todo()
+    elif opcion == "6":
+        print("👋 ¡Gracias por usar AmistApp! 💖")
+        break
+    else:
+        print("⚠️ Opción no válida.")
