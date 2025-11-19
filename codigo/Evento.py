@@ -45,3 +45,6 @@ class Evento(Actividad):
             print(f"⏰ Recordatorio: {self.recordatorio.mensaje} - Fecha recordatorio: {self.recordatorio.fecha}")
         else:
             print("⏰ Recordatorio: (ninguno)")
+            
+            
+            #estoy modificando algo
