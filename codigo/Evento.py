@@ -47,5 +47,4 @@ class Evento(Actividad):
             print("⏰ Recordatorio: (ninguno)")
             
             
-            #estoy modificando algo
-            #Isabela
+           
