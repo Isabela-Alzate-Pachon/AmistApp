@@ -1,6 +1,6 @@
-# evento.py
-from actividad import Actividad
-from recordatorio import Recordatorio
+
+from .actividad import Actividad
+from .recordatorio import Recordatorio
 from typing import Optional
 
 class Evento(Actividad):

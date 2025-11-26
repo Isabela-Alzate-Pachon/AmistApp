@@ -1,4 +1,4 @@
-from recordatorio import Recordatorio
+from .recordatorio import Recordatorio
 
 class Actividad:
     def __init__(self, titulo, fecha, descripcion, recordatorio):
@@ -18,3 +18,5 @@ class Actividad:
 
         if self.recordatorio:
             print(f"⏰ Recordatorio: '{self.recordatorio.mensaje}' programado para {self.recordatorio.fecha}")
+        else:
+            print("⏰ No hay recordatorio asignado.")    
